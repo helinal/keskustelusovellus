@@ -1,0 +1,9 @@
+<title>Keskustelusovellus</title>
+<h1>Keskustelusovelluksen etusivu</h1>
+Viestien määrä: {{ count }}
+<hr>
+{% for message in messages %}
+{{ message.content }}
+<hr>
+{% endfor %}
+<a href="/new">Lähetä viesti</a>
