@@ -1,9 +1,29 @@
-<title>Keskustelusovellus</title>
-<h1>Keskustelusovelluksen etusivu</h1>
+<title>ChitChat</title>
+
+{% if session.username %}
+<h1>ChitChat etusivu</h1>
+
+<p>Olet kirjautunut nimellä {{ session.username }}</p>
+<a href="/logout">Kirjaudu ulos</a>
+<br>
+<a href="/new">Luo uusi keskustelualue</a>
+<hr>
+
 Viestien määrä: {{ count }}
 <hr>
 {% for message in messages %}
 {{ message.content }}
 <hr>
 {% endfor %}
-<a href="/new">Lähetä viesti</a>
+
+{% else %}
+<h1>ChitChat</h1>
+<h2>Kirjaudu sisään</h2>
+<form action="/login" method="POST">
+<p>Tunnus:<br>
+<input type="text" name="username"></p>
+<p>Salasana:<br>
+<input type="password" name="password"></p>
+<input type="submit" value="Kirjaudu">
+</form>
+{% endif %}
