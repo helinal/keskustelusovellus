@@ -20,10 +20,11 @@ Viestien määrä: {{ count }}
 <h1>ChitChat</h1>
 <h2>Kirjaudu sisään</h2>
 <form action="/login" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
+    <p>Tunnus:<br>
+        <input type="text" name="username"></p>
+    <p>Salasana:<br>
+        <input type="password" name="password"></p>
+    <input type="submit" value="Kirjaudu">
 </form>
+<a href="/register">Luo uusi tunnus</a>
 {% endif %}
