@@ -1,0 +1,35 @@
+<h2>{{ name }}</h2>
+
+{% for chain in chains %}
+<p>
+<h3>{{ chain[1] }}</h3>
+<p>
+{{ chain[2] }}
+<p>
+<a href="/chain/{{ chain[0] }}">Avaa ketju</a> <br>
+<hr>
+{% endfor %}
+
+{% if session.user_id %}
+<p>
+<h4>Luo uusi ketju</h4>
+<form action="/create" method="POST">
+<p>Otsikko:<br>
+<input type="text" name="subject">
+<p>Aloitusviesti:<br>
+<textarea name="first_message" rows="3" cols="40"></textarea>
+<input type="hidden" name="area_id" value="{{ id }}">
+<p>
+<input type="submit" value="Luo ketju">
+</form>
+
+<p>
+<hr>Olet kirjautunut sisään | <a href="/">Palaa etusivulle</a> |
+<a href="/logout">Kirjaudu ulos</a>
+
+{% else %}
+<p>
+Kirjaudu sisään, jotta voit luoda uuden viestiketjun.
+<br>
+<a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
+{% endif %}
