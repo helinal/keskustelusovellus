@@ -60,4 +60,4 @@ Määritä vielä tietokannan skeema komennolla
 
 Nyt voit käynnistää sovelluksen komennolla
 
-```flask run```
+```$ flask run```
