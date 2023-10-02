@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import messages, users, areas, chains
 from db import db
 from sqlalchemy.sql import text
@@ -34,6 +34,7 @@ def add_area():
     
 @app.route("/remove", methods=["GET", "POST"])
 def remove():
+    #users.require_role(2)
     if request.method == "GET":
         list = areas.get_own_areas(users.user_id())
         return render_template("remove.html", list=list)
@@ -45,6 +46,7 @@ def remove():
 
 @app.route("/create", methods=["POST"])
 def create_chain():
+    #users.require_role(2)
     if request.method == "POST":
         subject = request.form["subject"]
         first_message = request.form["first_message"]
@@ -81,6 +83,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if users.login(username, password):
+            session["username"] = username
             return redirect("/")
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
@@ -98,9 +101,17 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
+
         if password1 != password2:
             return render_template("error.html", message="Salasanat eivät täsmää")
-        if users.register(username, password1):
+        if len(password1.strip()) == 0:
+            return render_template('error.html', message='Salasana ei voi olla tyhjä')
+
+        role = request.form['role']
+        if role not in ('1', '2'):
+            return render_template('error.html', message='Tuntematon käyttäjärooli')
+        
+        if users.register(username, password1, role):
             return redirect("/")
         else:
             return render_template("error.html", message="Rekisteröinti ei onnistunut")
