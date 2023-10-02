@@ -9,7 +9,7 @@
     <br>
     {% endif %}
     {% endfor %}
-
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <p>
     <input type="submit" value="Poista alue">
 </form>

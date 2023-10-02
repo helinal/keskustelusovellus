@@ -19,6 +19,7 @@
 <p>Aloitusviesti:<br>
 <textarea name="first_message" rows="3" cols="40"></textarea>
 <input type="hidden" name="area_id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <p>
 <input type="submit" value="Luo ketju">
 </form>
@@ -29,7 +30,7 @@
 
 {% else %}
 <p>
-Kirjaudu sisään, jotta voit luoda uuden viestiketjun.
-<br>
+Kirjaudu sisään luodaksesi uuden keskustelualueen.
+<p>
 <a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
 {% endif %}

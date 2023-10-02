@@ -16,6 +16,7 @@ def index():
 
 @app.route("/send", methods=["POST"])
 def send():
+    users.check_csrf()
     content = request.form["content"]
     chain_id = request.form["chain_id"]
     if messages.send(content, chain_id):
@@ -28,17 +29,19 @@ def add_area():
     if request.method == "GET":
         return render_template("add.html")
     if request.method == "POST":
+        users.check_csrf()
         name = request.form["name"]
         areas.add_area(name, users.user_id())
         return redirect("/")
     
 @app.route("/remove", methods=["GET", "POST"])
 def remove():
-    #users.require_role(2)
+    users.require_role(2)
     if request.method == "GET":
         list = areas.get_own_areas(users.user_id())
         return render_template("remove.html", list=list)
     if request.method == "POST":
+        users.check_csrf()
         if "area" in request.form:
             area_id = request.form["area"]
             areas.remove_area(area_id, users.user_id())
@@ -46,7 +49,7 @@ def remove():
 
 @app.route("/create", methods=["POST"])
 def create_chain():
-    #users.require_role(2)
+    users.check_csrf()
     if request.method == "POST":
         subject = request.form["subject"]
         first_message = request.form["first_message"]
@@ -83,7 +86,6 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if users.login(username, password):
-            session["username"] = username
             return redirect("/")
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
