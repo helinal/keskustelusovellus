@@ -34,7 +34,14 @@ def add_area():
     
 @app.route("/remove", methods=["GET", "POST"])
 def remove():
-    return render_template("remove.html")
+    if request.method == "GET":
+        list = areas.get_own_areas(users.user_id())
+        return render_template("remove.html", list=list)
+    if request.method == "POST":
+        if "area" in request.form:
+            area_id = request.form["area"]
+            areas.remove_area(area_id, users.user_id())
+        return redirect("/")
 
 @app.route("/create", methods=["POST"])
 def create_chain():
@@ -83,7 +90,7 @@ def logout():
     users.logout()
     return redirect("/")
 
-@app.route("/register", methods=["get","post"])
+@app.route("/register", methods=["GET","POST"])
 def register():
     if request.method == "GET":
         return render_template("register.html")

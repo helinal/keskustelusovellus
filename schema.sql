@@ -8,7 +8,7 @@ CREATE TABLE areas (
     id SERIAL PRIMARY KEY,
     name TEXT,
     user_id INTEGER REFERENCES users,
-    visible INTEGER
+    visible BOOLEAN
 );
 
 CREATE TABLE chains (
