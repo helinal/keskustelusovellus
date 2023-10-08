@@ -38,14 +38,14 @@ Ainakin seuraavat ominaisuudet olisi tarkoitus vielä lisätä:
 
 ## Välipalautus 3
 
-Sovellus alkaa olla muutamaa ominaisuutta lukuunottamatta valmis. Toteutettua toiminnallisuutta:
+Sovellus alkaa olla muutamaa ominaisuutta lukuun ottamatta valmis. Toteutettua toiminnallisuutta:
 - Peruskäyttäjien ja ylläpitäjien toiminnallisuus
 - Ylläpitäjät pystyvät poistamaan itse luotuja keskustelualueita
 - Käyttäjä kykenee hakemaan viestejä hakusanan avulla
 - Käyttäjän syötteiden tarkastus ja kuvaavat virheviestit lisätty
 - Csrf-tokenit otettu käyttöön
 - Html:n rakennetta paranneltu
-- Css:n avulla paranneltu sovelluksen ulkonäköä
+- Css:n avulla sovelluksen ulkonäön rakentaminen
 
 Yritin kolmanteen välipalautukseen saada mukaan myös ketjujen sekä viestien poisto- sekä muokkaustoiminnallisuuden, mutta tämän toiminnallisuuden toteuttamisessa kestikin yllättävän kauan aikaa enkä tähän palautukseen sitä ehtinyt saamaan valmiiksi. Tavoitteena on kuitenkin saada kyseinen toiminnallisuus mukaan lopulliseen palautukseen.
 
