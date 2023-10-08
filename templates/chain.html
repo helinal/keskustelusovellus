@@ -2,40 +2,54 @@
 {% block title %}Keskusteluketjut{% endblock %}
 {% block content %}
 
-<h2>{{ subject }}</h2>
+<div class="login">
+    {% if session.user_id %}
+    Olet kirjautunut sisään | <a href="/">Palaa etusivulle</a> | <a href="/logout">Kirjaudu ulos</a>
+        
+    {% else %}
+    Kirjaudu sisään osallistuaksesi keskusteluun.
+    <p>
+    <a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
+    {% endif %}
+</div>
 
-<p>
-Aloitusviesti: {{ first_message }}
-<p>
-Viestejä ketjussa: {{ count }}
-<hr>
+<div class="content">
+    <h2>{{ subject }}</h2>
+    <p>
+    Viestejä ketjussa: {{ count }}
+
+    <p>
+    Aloitusviesti: 
+    <div class="singlemessage">
+        {{ first_message }}
+        <p>
+    </div>
+</div>
 
 {% for message in messages %}
-<i>{{ message[0] }}</i>
-<p>
-Lähettäjä: {{ message[1] }} | Lähetetty: {{ message[2] }}
-<p>
-<hr>
+    <div class="message">
+        <p>
+        <div class="singlemessage">
+            {{ message[0] }}
+        </div>
+        <p>
+        Lähettäjä: {{ message[1] }} <br>
+        Lähetetty: {{ message[2] }}
+        <p>
+    </div>
 {% endfor %}
 
-{% if session.user_id %}
-<form action="/send" method="POST">
-    Lisää uusi viesti: <br>
-    <textarea name="content" rows="3" cols="40"></textarea>
-    <input type="hidden" name="chain_id" value="{{ id }}">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    <p>
-    <input type="submit" value="Lähetä">
-</form>
-
-<p>
-<hr>Olet kirjautunut sisään | <a href="/">Palaa etusivulle</a> | <a href="/logout">Kirjaudu ulos</a>
-
-{% else %}
-<p>
-Kirjaudu sisään osallistuaksesi keskusteluun.
-<p>
-<a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
-{% endif %}
+<div class="content">
+    {% if session.user_id %}
+    <form action="/send" method="POST">
+        <h4>Lisää uusi viesti</h4>
+        <textarea name="content" rows="3" cols="40"></textarea>
+        <input type="hidden" name="chain_id" value="{{ id }}">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <p>
+        <input type="submit" value="Lähetä">
+    </form>
+    {% endif %}
+</div>
 
 {% endblock %}

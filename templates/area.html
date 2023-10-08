@@ -2,41 +2,48 @@
 {% block title %}Keskustelualueet{% endblock %}
 {% block content %}
 
-<h2>{{ name }}</h2>
-
-{% for chain in chains %}
-<p>
-<h3>{{ chain[1] }}</h3>
-<p>
-{{ chain[2] }}
-<p>
-<a href="/chain/{{ chain[0] }}">Avaa ketju</a> <br>
-<hr>
-{% endfor %}
-
-{% if session.user_id %}
-<p>
-<h4>Luo uusi ketju</h4>
-<form action="/create" method="POST">
-    <p>Otsikko:<br>
-    <input type="text" name="subject">
-    <p>Aloitusviesti:<br>
-    <textarea name="first_message" rows="3" cols="40"></textarea>
-    <input type="hidden" name="area_id" value="{{ id }}">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+<div class="login">
+    {% if session.user_id %}
+    Olet kirjautunut sisään | <a href="/">Palaa etusivulle</a> |
+    <a href="/logout">Kirjaudu ulos</a>
+        
+    {% else %}
     <p>
-    <input type="submit" value="Luo ketju">
-</form>
+    Kirjaudu sisään luodaksesi uuden keskustelualueen.
+    <p>
+    <a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
+    {% endif %}
+</div>
 
-<p>
-<hr>Olet kirjautunut sisään | <a href="/">Palaa etusivulle</a> |
-<a href="/logout">Kirjaudu ulos</a>
+<div class="content">
+    <h2>{{ name }}</h2>
 
-{% else %}
-<p>
-Kirjaudu sisään luodaksesi uuden keskustelualueen.
-<p>
-<a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
-{% endif %}
+    {% for chain in chains %}
+    <p>
+    <h2>{{ chain[1] }}</h2>
+    <p>
+    {{ chain[2] }}
+    <p>
+    <a href="/chain/{{ chain[0] }}">Avaa ketju</a> <br>
+    <hr>
+    {% endfor %}
+</div>
+
+<div class="content">
+    {% if session.user_id %}
+    <p>
+    <h4>Luo uusi ketju</h4>
+    <form action="/create" method="POST">
+        <p>Otsikko:<br>
+        <input type="text" name="subject">
+        <p>Aloitusviesti:<br>
+        <textarea name="first_message" rows="3" cols="40"></textarea>
+        <input type="hidden" name="area_id" value="{{ id }}">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <p>
+        <input type="submit" value="Luo ketju">
+    </form>
+    {% endif %}
+</div>
 
 {% endblock %}

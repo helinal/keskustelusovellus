@@ -2,10 +2,12 @@
 {% block title %}Virhe{% endblock %}
 {% block content %}
 
-Tapahtui virhe.
-<p>
-Virheviesti: {{ message }}
-<p>
-<a href="/">Palaa takaisin etusivulle</a>
+<div class="error">
+    Tapahtui virhe.
+    <p>
+    Virheviesti: {{ message }}
+    <p>
+    <a href="/">Palaa takaisin etusivulle</a>    
+</div>
 
 {% endblock %}

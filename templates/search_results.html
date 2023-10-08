@@ -2,17 +2,19 @@
 {% block title %}Haun tulokset{% endblock %}
 {% block content %}
 
-<h2>Haun tulokset</h2>
+<div class="content">
+    <h2>Haun tulokset</h2>
 
-Hakusana: <em>{{ keyword }}</em>
-<p>
-
-{% for m in messages_found %} 
-{{ m.content }} | {{ m.sent_at }}
-<hr>
-{% endfor %}
-
-<p>
-<a href="/">Takaisin etusivulle</a>
+    Hakusana: <em>{{ keyword }}</em>
+    <p>
+    
+    {% for m in messages_found %} 
+    {{ m.content }} | {{ m.sent_at }}
+    <hr>
+    {% endfor %}
+    
+    <p>
+    <a href="/">Takaisin etusivulle</a>
+</div>
 
 {% endblock %}

@@ -2,24 +2,26 @@
 {% block title %}Rekisteröidy{% endblock %}
 {% block content %}
 
-<h2>Rekisteröidy</h2>
+<div class="register">
+    <h2>Rekisteröidy</h2>
 
-<form action="/register" method="post">
-    Tunnus: <input type="text" name="username">
+    <form action="/register" method="post">
+        Tunnus: <input type="text" name="username">
+        <p>
+        Salasana: <input type="password" name="password1">
+        <p>
+        Salasana uudestaan: <input type="password" name="password2">
+        <p>
+        Valitse käyttäjäroolisi:
+        <select name="role">
+            <option value=1> Peruskäyttäjä
+            <option value=2> Ylläpitäjä    
+        </select>
+        <p>
+        <input type="submit" value="Luo uusi tunnus">
+    </form>
+    
+    <a href="/login">Palaa takaisin</a>
     <p>
-    Salasana: <input type="password" name="password1">
-    <p>
-    Salasana uudestaan: <input type="password" name="password2">
-    <p>
-    Valitse käyttäjäroolisi:
-    <select name="role">
-        <option value=1> Peruskäyttäjä
-        <option value=2> Ylläpitäjä    
-    </select>
-    <p>
-    <input type="submit" value="Luo uusi tunnus">
-</form>
-
-<a href="/login">Palaa takaisin</a>
-
-{% endblock %}
+    {% endblock %}
+</div>

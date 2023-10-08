@@ -2,22 +2,24 @@
 {% block title %}Poista alue{% endblock %}
 {% block content %}
 
-<h2>Poista keskustelualue</h2>
+<div class="content">
+    <h2>Poista keskustelualue</h2>
 
-<form action="/remove" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän keskustelualueen?')">
-    Valitse poistettava alue:
-    <p>
-    {% for area in list %}
-    {% if area.visible == TRUE %}
-    <input type="radio" name="area" value="{{ area.id }}"> {{ area.name }}
-    <br>
-    {% endif %}
-    {% endfor %}
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    <p>
-    <input type="submit" value="Poista alue">
-</form>
-
-<a href="/">Palaa etusivulle</a>
+    <form action="/remove" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän keskustelualueen?')">
+        Valitse poistettava alue:
+        <p>
+        {% for area in list %}
+        {% if area.visible == TRUE %}
+        <input type="radio" name="area" value="{{ area.id }}"> {{ area.name }}
+        <br>
+        {% endif %}
+        {% endfor %}
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <p>
+        <input type="submit" value="Poista alue">
+    </form>
+    
+    <a href="/">Palaa etusivulle</a>
+</div>
 
 {% endblock %}

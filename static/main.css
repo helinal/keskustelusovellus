@@ -1,0 +1,63 @@
+body {
+    margin: auto;
+    max-width: 45em;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background-color: lightgrey;
+}
+
+.header {
+    background: mediumaquamarine;
+    font-weight: bold;
+    padding: 0.3em 0.3em;
+    font-size: 1.2em;
+    border-radius: .5em;
+    margin-top: .5em;
+    text-align: center;
+}
+
+.login {
+    background-color: white;
+    padding: 0.05em 0.5em;
+    border-radius: .5em;
+    margin-top: .5em;
+}
+
+.content {
+    background-color: white;
+    padding: 0.05em 0.5em;
+    border-radius: .5em;
+    margin-top: .5em;
+}
+
+.loginpage {
+    background-color: white;
+    padding: 0.05em 0.5em;
+    border-radius: .5em;
+    margin-top: .5em;
+}
+
+.register {
+    background-color: white;
+    padding: 0.05em 0.5em;
+    border-radius: .5em;
+    margin-top: .5em;
+}
+
+.error {
+    background-color: lightcoral;
+    padding: 0.05em 0.5em;
+    border-radius: .5em;
+    margin-top: .5em;
+}
+
+.message {
+    background-color: rgba(255, 255, 255, 0.726);
+    padding: 0.05em 0.5em;
+    border-radius: .5em;
+    margin-top: .5em;
+}
+
+.singlemessage{
+    font-size: larger;
+    font-style: oblique;
+}
