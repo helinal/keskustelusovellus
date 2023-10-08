@@ -1,6 +1,6 @@
 <h2>Poista keskustelualue</h2>
 
-<form action="/remove" method="POST">
+<form action="/remove" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän keskustelualueen?')">
     Valitse poistettava alue:
     <p>
     {% for area in list %}
