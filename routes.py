@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect
 import messages, users, areas, chains
 from db import db
 from sqlalchemy.sql import text
@@ -121,11 +121,11 @@ def register():
         if password1 != password2:
             return render_template("error.html", message="Salasanat eivät täsmää")
         if len(password1.strip()) == 0:
-            return render_template('error.html', message='Salasana ei voi olla tyhjä')
+            return render_template("error.html", message="Salasana ei voi olla tyhjä")
 
         role = request.form['role']
         if role not in ('1', '2'):
-            return render_template('error.html', message='Tuntematon käyttäjärooli')
+            return render_template("error.html", message="Tuntematon käyttäjärooli")
         
         if users.register(username, password1, role):
             return redirect("/")
@@ -136,6 +136,8 @@ def register():
 def search():
     users.check_csrf()
     keyword = request.form["content"]
+    if len(keyword.strip()) == 0:
+        return render_template("error.html", message="Hakusana ei voi olla tyhjä")
     messages_found = messages.search_messages(keyword)
     return render_template("search_results.html", messages_found=messages_found, keyword=keyword)
 
