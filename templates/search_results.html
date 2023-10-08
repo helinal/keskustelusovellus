@@ -3,14 +3,17 @@
 {% block content %}
 
 <div class="content">
-    <h2>Haun tulokset</h2>
+    <h3>Haun tulokset</h3>
 
     Hakusana: <em>{{ keyword }}</em>
     <p>
     
     {% for m in messages_found %} 
-    {{ m.content }} | {{ m.sent_at }}
-    <hr>
+    <div class="singlemessage">
+        {{ m.content }}
+    </div>
+    lähetetty: {{ m.sent_at }}
+    <p>
     {% endfor %}
     
     <p>

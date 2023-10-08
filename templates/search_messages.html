@@ -3,17 +3,16 @@
 {% block content %}
 
 <div class="content">
+  <h3>Etsi viestejä</h3>
   <form action="/search_messages" method="POST">
+    <p>
     Anna hakusana: <input type="text "name="content">
     <p>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" value="Hae" />
   </form>
-  <hr>
   <p>
   <a href="/">Takaisin etusivulle</a>
 </div>
-
-<h2>Etsi viestejä</h2>
 
 {% endblock %}

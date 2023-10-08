@@ -4,12 +4,12 @@
 
 <div class="login">
     {% if session.user_id %}
-    Olet kirjautunut sisään | <a href="/">Palaa etusivulle</a> | <a href="/logout">Kirjaudu ulos</a>
+    Olet kirjautunut sisään <a href="/">Palaa etusivulle</a> <a href="/logout">Kirjaudu ulos</a>
         
     {% else %}
     Kirjaudu sisään osallistuaksesi keskusteluun.
     <p>
-    <a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
+    <a href="/login">Kirjaudu sisään</a> <a href="/">Palaa etusivulle</a>
     {% endif %}
 </div>
 
@@ -26,19 +26,6 @@
     </div>
 </div>
 
-{% for message in messages %}
-    <div class="message">
-        <p>
-        <div class="singlemessage">
-            {{ message[0] }}
-        </div>
-        <p>
-        Lähettäjä: {{ message[1] }} <br>
-        Lähetetty: {{ message[2] }}
-        <p>
-    </div>
-{% endfor %}
-
 <div class="content">
     {% if session.user_id %}
     <form action="/send" method="POST">
@@ -51,5 +38,18 @@
     </form>
     {% endif %}
 </div>
+
+{% for message in messages %}
+    <div class="message">
+        <p>
+        <div class="singlemessage">
+            {{ message[0] }}
+        </div>
+        <p>
+        Lähettäjä: {{ message[1] }} <br>
+        Lähetetty: {{ message[2] }}
+        <p>
+    </div>
+{% endfor %}
 
 {% endblock %}

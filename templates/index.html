@@ -5,14 +5,22 @@
 <body>
     <div class="login">
         {% if session.username %}
-        Hei <em>{{ session.username }}</em>! Olet kirjautunut sisään. | <a href="/logout">Kirjaudu ulos</a>
+        Hei <em>{{ session.username }}</em>! Olet kirjautunut sisään <a href="/logout">Kirjaudu ulos</a>
         
         {% else %}
-        Et ole kirjautunut sisään. | <a href="/login">Kirjaudu sisään</a>
+        Et ole kirjautunut sisään <a href="/login">Kirjaudu sisään</a>
         {% endif %}
     </div>
    
     <div class="content">
+
+        <p>
+        Alueita yhteensä: {{ count }}
+        <p>
+        <a href="/search">Etsi viestejä</a>
+        <p>
+    
+
         {% for area in areas %}
         <h3>{{ area[1] }}</h3>
         <p>
@@ -35,13 +43,6 @@
         <a href="/area/{{ area[0] }}">Siirry alueelle</a>
         <hr>
         {% endfor %}
-
-        <p>
-        <a href="/search">Etsi viestejä</a>
-        <p>
-
-        Alueita yhteensä: {{ count }}
-        <p>
     </div>
 
     <div class="content">
@@ -49,6 +50,7 @@
         <h4>Ylläpitäjän toiminnot</h4>
         <ul>
             <li><a href="/add">Luo uusi keskustelualue</a></li>
+            <p>
             <li><a href="/remove">Poista keskustelualue</a></li>
         </ul>
         {% endif %} 

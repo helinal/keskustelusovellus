@@ -4,23 +4,23 @@
 
 <div class="login">
     {% if session.user_id %}
-    Olet kirjautunut sisään | <a href="/">Palaa etusivulle</a> |
+    Olet kirjautunut sisään <a href="/">Palaa etusivulle</a>
     <a href="/logout">Kirjaudu ulos</a>
         
     {% else %}
     <p>
     Kirjaudu sisään luodaksesi uuden keskustelualueen.
     <p>
-    <a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
+    <a href="/login">Kirjaudu sisään</a> <a href="/">Palaa etusivulle</a>
     {% endif %}
 </div>
 
 <div class="content">
-    <h2>{{ name }}</h2>
+    <h3>{{ name }}</h3>
 
     {% for chain in chains %}
     <p>
-    <h2>{{ chain[1] }}</h2>
+    <h4>{{ chain[1] }}</h4>
     <p>
     {{ chain[2] }}
     <p>

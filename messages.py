@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 
 def get_list(id):
     list = []
-    sql = text("SELECT M.content, U.username, M.sent_at FROM messages M, users U, chains C WHERE M.chain_id=:id AND M.user_id=U.id ORDER BY M.id")
+    sql = text("SELECT M.content, U.username, M.sent_at FROM messages M, users U, chains C WHERE M.chain_id=:id AND M.user_id=U.id ORDER BY M.id DESC")
     results = db.session.execute(sql, {"id":id}).fetchall()
     for result in results:
         if result in list:
