@@ -1,5 +1,6 @@
-<title>ChitChat</title>
-<h1>ChitChat</h1>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
 
 {% if session.username %}
 Hei <em>{{ session.username }}</em>! Olet kirjautunut sisään. | <a href="/logout">Kirjaudu ulos</a>
@@ -47,3 +48,5 @@ Alueita yhteensä: {{ count }}
     <li><a href="/remove">Poista keskustelualue</a></li>
 </ul>
 {% endif %} 
+
+{% endblock %}

@@ -1,4 +1,11 @@
-<h3>Haun tulokset hakusanalla <em>{{ keyword }}</em></h3>
+{% extends "layout.html" %}
+{% block title %}Haun tulokset{% endblock %}
+{% block content %}
+
+<h2>Haun tulokset</h2>
+
+Hakusana: <em>{{ keyword }}</em>
+<p>
 
 {% for m in messages_found %} 
 {{ m.content }} | {{ m.sent_at }}
@@ -7,3 +14,5 @@
 
 <p>
 <a href="/">Takaisin etusivulle</a>
+
+{% endblock %}

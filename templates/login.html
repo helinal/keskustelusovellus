@@ -1,5 +1,8 @@
-<h2>ChitChat</h2>
-<h3>Kirjaudu sisään</h3>
+{% extends "layout.html" %}
+{% block title %}Kirjautuminen{% endblock %}
+{% block content %}
+
+<h2>Kirjaudu sisään</h2>
 
 <form action="/login" method="post">
     Tunnus: <input type="text" name="username">
@@ -11,3 +14,5 @@
 Jos sinulla ei ole tunnusta, luo uusi tunnus <a href="/register">tästä</a>
 <p>
 <a href="/">Palaa takaisin etusivulle</a>
+
+{% endblock %}

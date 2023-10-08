@@ -1,5 +1,8 @@
-<h2>ChitChat</h2>
-<h3>Rekisteröidy</h3>
+{% extends "layout.html" %}
+{% block title %}Rekisteröidy{% endblock %}
+{% block content %}
+
+<h2>Rekisteröidy</h2>
 
 <form action="/register" method="post">
     Tunnus: <input type="text" name="username">
@@ -18,3 +21,5 @@
 </form>
 
 <a href="/login">Palaa takaisin</a>
+
+{% endblock %}

@@ -1,3 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Poista alue{% endblock %}
+{% block content %}
+
 <h2>Poista keskustelualue</h2>
 
 <form action="/remove" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän keskustelualueen?')">
@@ -15,3 +19,5 @@
 </form>
 
 <a href="/">Palaa etusivulle</a>
+
+{% endblock %}

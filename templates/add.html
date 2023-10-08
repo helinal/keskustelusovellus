@@ -1,3 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Keskustelualue{% endblock %}
+{% block content %}
+
 <h2>Luo uusi keskustelualue</h2>
 
 <form action="/add" method="POST">
@@ -9,3 +13,5 @@
 </form>
 
 <a href="/">Palaa etusivulle</a>
+
+{% endblock %}

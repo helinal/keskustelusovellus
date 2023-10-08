@@ -1,3 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Keskustelualueet{% endblock %}
+{% block content %}
+
 <h2>{{ name }}</h2>
 
 {% for chain in chains %}
@@ -14,14 +18,14 @@
 <p>
 <h4>Luo uusi ketju</h4>
 <form action="/create" method="POST">
-<p>Otsikko:<br>
-<input type="text" name="subject">
-<p>Aloitusviesti:<br>
-<textarea name="first_message" rows="3" cols="40"></textarea>
-<input type="hidden" name="area_id" value="{{ id }}">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<p>
-<input type="submit" value="Luo ketju">
+    <p>Otsikko:<br>
+    <input type="text" name="subject">
+    <p>Aloitusviesti:<br>
+    <textarea name="first_message" rows="3" cols="40"></textarea>
+    <input type="hidden" name="area_id" value="{{ id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <p>
+    <input type="submit" value="Luo ketju">
 </form>
 
 <p>
@@ -34,3 +38,5 @@ Kirjaudu sisään luodaksesi uuden keskustelualueen.
 <p>
 <a href="/login">Kirjaudu sisään</a> | <a href="/">Palaa etusivulle</a>
 {% endif %}
+
+{% endblock %}
