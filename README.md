@@ -36,6 +36,21 @@ Ainakin seuraavat ominaisuudet olisi tarkoitus vielä lisätä:
 - Keskustelualueiden poistaminen (ylläpitäjä)
 - Tietoturvan parantaminen esim. csrf_tokeneiden avulla
 
+## Välipalautus 3
+
+Sovellus alkaa olla muutamaa ominaisuutta lukuunottamatta valmis. Toteutettua toiminnallisuutta:
+- Peruskäyttäjien ja ylläpitäjien toiminnallisuus
+- Ylläpitäjät pystyvät poistamaan itse luotuja keskustelualueita
+- Käyttäjä kykenee hakemaan viestejä hakusanan avulla
+- Käyttäjän syötteiden tarkastus ja kuvaavat virheviestit lisätty
+- Csrf-tokenit otettu käyttöön
+- Html:n rakennetta paranneltu
+- Css:n avulla paranneltu sovelluksen ulkonäköä
+
+Yritin kolmanteen välipalautukseen saada mukaan myös ketjujen sekä viestien poisto- sekä muokkaustoiminnallisuuden, mutta tämän toiminnallisuuden toteuttamisessa kestikin yllättävän kauan aikaa enkä tähän palautukseen sitä ehtinyt saamaan valmiiksi. Tavoitteena on kuitenkin saada kyseinen toiminnallisuus mukaan lopulliseen palautukseen.
+
+Olen myös tietoinen siitä, että lopullisessa sovelluksessa olisi hyvä olla vähintään viisi tietokantataulua. Tavoitteena on keksiä vielä jokin toiminnallisuus, jotta saisin viidennen taulun käyttöön (esim. tykkäysten tai salaisten alueiden lisääminen).
+
 ## Käynnistysohjeet
 
 Sovellus ei valitettavasti ole FLy.io:ssa testattavissa, joten sovellus tulee käynnistää paikallisesti. Käynnistysohjeet alla.
