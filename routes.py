@@ -18,6 +18,11 @@ def index():
 def send():
     users.check_csrf()
     content = request.form["content"]
+    if len(content.strip()) == 0:
+        return render_template('error.html', message='Viesti ei voi olla tyhjä')
+    if len(content.strip()) > 200:
+        return render_template('error.html', message='Liian pitkä viesti. Viestin tulee olla 1-200 merkkiä pitkä.')
+
     chain_id = request.form["chain_id"]
     if messages.send(content, chain_id):
         return redirect("/chain/"+chain_id)
@@ -31,6 +36,9 @@ def add_area():
     if request.method == "POST":
         users.check_csrf()
         name = request.form["name"]
+        if len(name) < 1 or len(name) > 25:
+            return render_template("error.html", message="Keskustelualueen nimen tulee olla 1-25 merkkiä pitkä")
+
         areas.add_area(name, users.user_id())
         return redirect("/")
     
@@ -52,7 +60,13 @@ def create_chain():
     users.check_csrf()
     if request.method == "POST":
         subject = request.form["subject"]
+        if len(subject) < 1 or len(subject) > 50:
+            return render_template("error.html", message="Otsikon tulee olla 1-50 merkkiä pitkä")
+        
         first_message = request.form["first_message"]
+        if len(first_message) < 1 or len(first_message) > 200:
+            return render_template("error.html", message="Aloitusviestin tulee olla 1-200 merkkiä pitkä")
+    
         area_id = request.form["area_id"]
 
         if users.user_id() == 0:

@@ -38,7 +38,8 @@ Alueita yhteensä: {{ count }}
 
 {% if session.user_role == 2 %}
 <h4>Ylläpitäjän toiminnot</h4>
-<a href="/add">Luo uusi keskustelualue</a>
-<br>
-<a href="/remove">Poista keskustelualue</a>
+<ul>
+    <li><a href="/add">Luo uusi keskustelualue</a></li>
+    <li><a href="/remove">Poista keskustelualue</a></li>
+</ul>
 {% endif %} 
