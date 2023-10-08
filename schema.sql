@@ -17,7 +17,8 @@ CREATE TABLE chains (
     area_id INTEGER REFERENCES areas,
     subject TEXT,
     first_message TEXT,
-    user_id INTEGER REFERENCES users
+    user_id INTEGER REFERENCES users,
+    visible BOOLEAN
 );
 
 CREATE TABLE messages (
@@ -25,5 +26,6 @@ CREATE TABLE messages (
     content TEXT,
     user_id INTEGER REFERENCES users,
     sent_at TIMESTAMP,
-    chain_id INTEGER REFERENCES chains
+    chain_id INTEGER REFERENCES chains,
+    visible BOOLEAN
 );

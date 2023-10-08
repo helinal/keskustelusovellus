@@ -1,0 +1,11 @@
+<h2>Etsi viestejä</h2>
+
+<form action="/search_messages" method="POST">
+  Anna hakusana: <input type="text "name="content">
+  <p>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+  <input type="submit" value="Hae" />
+</form>
+<hr>
+<p>
+<a href="/">Takaisin etusivulle</a>

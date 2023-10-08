@@ -1,0 +1,9 @@
+<h3>Haun tulokset hakusanalla <em>{{ keyword }}</em></h3>
+
+{% for m in messages_found %} 
+{{ m.content }} | {{ m.sent_at }}
+<hr>
+{% endfor %}
+
+<p>
+<a href="/">Takaisin etusivulle</a>

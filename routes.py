@@ -131,3 +131,14 @@ def register():
             return redirect("/")
         else:
             return render_template("error.html", message="Rekisteröinti ei onnistunut")
+        
+@app.route("/search_messages", methods=["POST"])
+def search():
+    users.check_csrf()
+    keyword = request.form["content"]
+    messages_found = messages.search_messages(keyword)
+    return render_template("search_results.html", messages_found=messages_found, keyword=keyword)
+
+@app.route("/search")
+def create_search():
+    return render_template("search_messages.html")

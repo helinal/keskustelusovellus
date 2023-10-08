@@ -3,7 +3,7 @@ import users
 from sqlalchemy.sql import text
 
 def get_list():
-    sql = text("SELECT C.subject, C.first_message, U.username, C.area_id FROM chains C, users U WHERE C.user_id=U.id ORDER BY C.id")
+    sql = text("SELECT C.subject, C.first_message, U.username, C.area_id FROM chains C, users U WHERE C.user_id=U.id AND visible=TRUE ORDER BY C.id")
     result = db.session.execute(sql)
     return result.fetchall()
 
@@ -23,7 +23,7 @@ def get_first_message(id):
     return result.fetchone()[0]
 
 def get_own_chains(user_id):
-    sql = text("SELECT id, subject, first_message FROM chains WHERE user_id=:user_id ORDER BY id")
+    sql = text("SELECT id, subject, first_message FROM chains WHERE user_id=:user_id AND visible=TRUE ORDER BY id")
     return db.session.execute(sql, {"user_id":user_id}).fetchall()
 
 def create(area_id, subject, first_message):
@@ -37,6 +37,11 @@ def in_area(id):
     sql = text("SELECT :area AS area, COUNT(*) FROM chains WHERE area_id=:id")
     result = db.session.execute(sql, {"id":id, "area":area})
     return result.fetchall()
+
+def remove_chain(id, user_id):
+    sql = text("UPDATE chains SET visible=FALSE WHERE id=:id AND user_id=:user_id")
+    db.session.execute(sql, {"id":id, "user_id":user_id})
+    db.session.commit()
 
 def edit_first_message(id, first_message):
     sql = text("UPDATE chains SET first_message=:first_message WHERE id=:id")
