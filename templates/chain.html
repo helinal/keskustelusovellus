@@ -4,7 +4,7 @@
 
 <div class="login">
     {% if session.user_id %}
-    Olet kirjautunut sisään <a href="/">Palaa etusivulle</a> <a href="/logout">Kirjaudu ulos</a>
+    Olet kirjautunut sisään nimellä <em>{{ session.username }}</em>. <a href="/">Palaa etusivulle</a> <a href="/logout">Kirjaudu ulos</a>
         
     {% else %}
     Kirjaudu sisään osallistuaksesi keskusteluun.
@@ -39,6 +39,7 @@
     {% endif %}
 </div>
 
+{% if messages %}
 {% for message in messages %}
     <div class="message">
         <p>
@@ -51,5 +52,16 @@
         <p>
     </div>
 {% endfor %}
+
+{% else %}
+    <div class="message">
+        <p>
+        <div class="singlemessage">
+            Ketjussa ei ole vielä viestejä - kirjoita ensimmäinen!
+        </div>
+        <p>
+    </div>
+
+{% endif %}
 
 {% endblock %}

@@ -8,13 +8,20 @@
     Hakusana: <em>{{ keyword }}</em>
     <p>
     
+    {% if messages_found %}
+
     {% for m in messages_found %} 
     <div class="singlemessage">
         {{ m.content }}
     </div>
     lähetetty: {{ m.sent_at }}
-    <p>
+    <hr>
     {% endfor %}
+
+    {% else %}
+    Hakusanalla ei löytynyt viestejä.
+
+    {% endif %}
     
     <p>
     <a href="/">Takaisin etusivulle</a>

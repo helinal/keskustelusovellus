@@ -77,7 +77,6 @@ def create_chain():
 
 @app.route("/chain/<int:id>")
 def chain(id):
-    print('chain')
     subject = chains.get_subject(id)
     first_message = chains.get_first_message(id)
     list = messages.get_list(id)
@@ -85,7 +84,6 @@ def chain(id):
 
 @app.route("/area/<int:id>")
 def area(id):
-    print('area')
     name = areas.get_name(id)
     sql = text("SELECT id, subject, first_message FROM chains WHERE area_id=:id")
     result = db.session.execute(sql, {"id":id})

@@ -29,7 +29,7 @@ def in_area(id):
     return result.fetchall()
 
 def search_messages(keyword):
-    sql = text("SELECT id, content, sent_at, chain_id, visible FROM messages WHERE content LIKE :content ORDER BY sent_at DESC")
+    sql = text("SELECT id, content, user_id, sent_at, chain_id, visible FROM messages WHERE content LIKE :content ORDER BY sent_at DESC")
     result = db.session.execute(sql, {"content":"%"+keyword+"%"})
     messages = result.fetchall()
     return messages
