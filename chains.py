@@ -23,7 +23,7 @@ def get_first_message(id):
     return result.fetchone()[0]
 
 def get_own_chains(user_id):
-    sql = text("SELECT id, subject, first_message FROM chains WHERE user_id=:user_id ORDER BY id")
+    sql = text("SELECT id, subject, first_message FROM chains WHERE user_id=:user_id AND visible=TRUE ORDER BY id")
     return db.session.execute(sql, {"user_id":user_id}).fetchall()
 
 def create(area_id, subject, first_message):

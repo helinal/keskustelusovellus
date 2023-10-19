@@ -155,8 +155,18 @@ def edit_subject():
         if "chain" in request.form:
             chain_id = request.form["chain"]
             subject = request.form["subject"]
-
-            if len(subject.strip()) == 0:
-                return render_template("error.html", message="Uusi otsikko ei voi olla tyhjä")
             chains.edit_subject(chain_id, subject)
         return redirect("/chain/"+chain_id)
+    
+@app.route("/edit_message", methods=["GET", "POST"])
+def edit_message():
+    if request.method == "GET":
+        list = messages.get_own_messages(users.user_id())
+        return render_template("edit_message.html", list=list)
+
+    if request.method == "POST":
+        if "message" in request.form:
+            message_id= request.form["message"]
+            content = request.form["newmessage"]
+            messages.edit_message(message_id, content)
+        return redirect("/")

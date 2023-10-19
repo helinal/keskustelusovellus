@@ -55,6 +55,10 @@
         Lähettäjä: {{ message[1] }} <br>
         Lähetetty: {{ message[2] }}
         <p>
+        {% if session.user_id %}
+        <a href="/edit_message">Muokkaa viestiä</a>
+        
+        {% endif %}
     </div>
 {% endfor %}
 

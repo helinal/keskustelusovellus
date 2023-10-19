@@ -5,6 +5,7 @@
 <div class="content">
     <h3>Muokkaa ketjun otsikkoa</h3>
 
+    {% if list %}
     Minkä ketjun otsikkoa muutetaan?
     <form action="/edit_subject" method="POST">
         {% for chain in list %}
@@ -13,10 +14,17 @@
 
         <p>
         Anna uusi otsikko: <br>
-        <input type="text" name="subject">
+        <input type="text" name="subject" required>
         <p>
         <input type="submit" value="Muuta otsikko">
     </form>
+
+    {% else %}
+        Et ole vielä luonut omia viestiketjuja, joiden otsikkoa voisit muokata. <p>
+    {% endif %}
+
+    <a href="/">Palaa etusivulle</a> 
+    <p>
 </div>
 
 {% endblock %}

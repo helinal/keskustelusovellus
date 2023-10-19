@@ -13,6 +13,10 @@ def get_list(id):
             list.append(result)
     return list
 
+def get_own_messages(user_id):
+    sql = text("SELECT id, content, sent_at FROM messages WHERE user_id=:user_id AND visible=TRUE ORDER BY id")
+    return db.session.execute(sql, {"user_id":user_id}).fetchall()
+
 def send(content, chain_id):
     user_id = users.user_id()
     if user_id == 0:
@@ -33,6 +37,11 @@ def search_messages(keyword):
     result = db.session.execute(sql, {"content":"%"+keyword+"%"})
     messages = result.fetchall()
     return messages
+
+def edit_message(id, content):
+    sql = text("UPDATE messages SET content=:content WHERE id=:id")
+    db.session.execute(sql, {"id":id, "content":content})
+    db.session.commit()
 
 def remove_message(id, user_id):
     sql = text("UPDATE messages SET visible=FALSE WHERE id=:id AND user_id=:user_id")
