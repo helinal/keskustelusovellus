@@ -9,7 +9,6 @@
         
     {% else %}
     Kirjaudu sisään luodaksesi uuden keskustelualueen.
-    <p>
     <a href="/login">Kirjaudu sisään</a> <a href="/">Palaa etusivulle</a>
     {% endif %}
 </div>
@@ -17,7 +16,7 @@
 <div class="content">
     {% if session.user_id %}
     <p>
-    <h4>Luo uusi ketju</h4>
+    <h4>Luo uusi viestiketju</h4>
     <form action="/create" method="POST">
         <p>Otsikko:<br>
         <input type="text" name="subject">
@@ -32,13 +31,13 @@
 </div>
 
 <div class="content">
-    <h3>{{ name }}</h3>
+    <h2>{{ name }}</h2>
     <hr>
 
     {% if chains %}
     {% for chain in chains %}
     <p>
-    <h4>{{ chain[1] }}</h4>
+    <h3>{{ chain[1] }}</h3>
     <p>
     {{ chain[2] }}
     <p>

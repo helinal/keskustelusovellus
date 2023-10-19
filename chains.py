@@ -23,12 +23,12 @@ def get_first_message(id):
     return result.fetchone()[0]
 
 def get_own_chains(user_id):
-    sql = text("SELECT id, subject, first_message FROM chains WHERE user_id=:user_id AND visible=TRUE ORDER BY id")
+    sql = text("SELECT id, subject, first_message FROM chains WHERE user_id=:user_id ORDER BY id")
     return db.session.execute(sql, {"user_id":user_id}).fetchall()
 
 def create(area_id, subject, first_message):
     user_id = users.user_id()
-    sql = text("INSERT INTO chains (area_id, subject, first_message, user_id) VALUES (:area_id, :subject, :first_message, :user_id)")
+    sql = text("INSERT INTO chains (area_id, subject, first_message, user_id, visible) VALUES (:area_id, :subject, :first_message, :user_id, TRUE)")
     db.session.execute(sql, {"area_id":area_id, "subject":subject, "first_message":first_message, "user_id":user_id})
     db.session.commit()
 

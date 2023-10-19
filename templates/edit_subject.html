@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Otsikon muokkaus{% endblock %}
+{% block content %}
+
+<div class="content">
+    <h3>Muokkaa ketjun otsikkoa</h3>
+
+    Minkä ketjun otsikkoa muutetaan?
+    <form action="/edit_subject" method="POST">
+        {% for chain in list %}
+            <input type="radio" name="chain" value="{{ chain.id }}" required> {{ chain.subject }} <br>
+        {% endfor %}
+
+        <p>
+        Anna uusi otsikko: <br>
+        <input type="text" name="subject">
+        <p>
+        <input type="submit" value="Muuta otsikko">
+    </form>
+</div>
+
+{% endblock %}

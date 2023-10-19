@@ -1,7 +1,7 @@
 body {
     margin: auto;
     max-width: 45em;
-    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     background-color: rgb(82, 114, 99);
 }
 
@@ -9,7 +9,7 @@ body {
     background: rgba(148, 151, 151, 0.863);
     font-weight: bold;
     padding: 0.3em 0.3em;
-    font-size: 1.2em;
+    font-size: 1.4em;
     border-radius: .5em;
     margin-top: .5em;
     text-align: center;

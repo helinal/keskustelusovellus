@@ -15,14 +15,12 @@
     <div class="content">
 
         <p>
-        Alueita yhteensä: {{ count }}
-        <p>
         <a href="/search">Etsi viestejä</a>
         <p>
-    
+        Keskustelualueita yhteensä: {{ count }}
 
         {% for area in areas %}
-        <h3>{{ area[1] }}</h3>
+        <h2>{{ area[1] }}</h2>
         <p>
         {% for chain in chains %}
         {% for tuple in chain %}

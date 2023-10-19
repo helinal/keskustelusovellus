@@ -4,6 +4,7 @@ import messages, users, areas, chains
 from db import db
 from sqlalchemy.sql import text
 
+
 @app.route("/")
 def index():
     list_areas = areas.get_list()
@@ -34,6 +35,7 @@ def add_area():
     if request.method == "GET":
         return render_template("add.html")
     if request.method == "POST":
+        users.require_role(2)
         users.check_csrf()
         name = request.form["name"]
         if len(name) < 1 or len(name) > 25:
@@ -142,3 +144,19 @@ def search():
 @app.route("/search")
 def create_search():
     return render_template("search_messages.html")
+
+@app.route("/edit_subject", methods=["GET", "POST"])
+def edit_subject():
+    if request.method == "GET":
+        list = chains.get_own_chains(users.user_id())
+        return render_template("edit_subject.html", list=list)
+
+    if request.method == "POST":
+        if "chain" in request.form:
+            chain_id = request.form["chain"]
+            subject = request.form["subject"]
+
+            if len(subject.strip()) == 0:
+                return render_template("error.html", message="Uusi otsikko ei voi olla tyhjä")
+            chains.edit_subject(chain_id, subject)
+        return redirect("/chain/"+chain_id)
