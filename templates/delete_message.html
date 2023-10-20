@@ -3,22 +3,27 @@
 {% block content %}
 
 <div class="content">
-    <h2>Poista viestejäsi</h2>
+    <h3>Poista viestejäsi</h3>
 
-    <form action="/delete_message" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän viestin?')">
-        Valitse poistettava viesti:
-        <p>
-        {% for message in list %}
-            {% if message.visible == TRUE %}
-            <input type="radio" name="message" value="{{ message.id }}" required> {{ message.content }}, <em>lähetetty: {{message.sent_at}}</em> 
-            <br>
-            {% endif %}
-        {% endfor %}
-        <p>
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
-        <input id="formbutton" type="submit" value="Poista viesti">
-    </form>
-    
+    {% if list %}
+        <form action="/delete_message" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän viestin?')">
+            Valitse poistettava viesti:
+            <p>
+            {% for message in list %}
+                {% if message.visible == TRUE %}
+                <input type="radio" name="message" value="{{ message.id }}" required> {{ message.content }}, <em>lähetetty: {{message.sent_at}}</em> 
+                <br>
+                {% endif %}
+            {% endfor %}
+            <p>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
+            <input id="formbutton" type="submit" value="Poista viesti">
+        </form>
+        
+    {% else %}
+        Et ole vielä kirjoittanut omia viestejä. <p>
+    {% endif %}
+
     <a href="/">Palaa etusivulle</a>
     <p>
 </div>

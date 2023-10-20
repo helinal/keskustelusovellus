@@ -9,6 +9,16 @@
     <h1>ChitChat</h1>
 </div>
 
+<div class="login">
+  {% if session.user_id %}
+      Olet kirjautunut sisään nimellä <em>{{ session.username }}</em>. <a href="/logout">Kirjaudu ulos</a>
+      
+  {% else %}
+      Kirjaudu sisään osallistuaksesi keskusteluun.
+      <a href="/login">Kirjaudu sisään</a>
+  {% endif %}
+</div>
+
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <p>

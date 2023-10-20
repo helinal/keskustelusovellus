@@ -2,16 +2,6 @@
 {% block title %}Keskusteluketjut{% endblock %}
 {% block content %}
 
-<div class="login">
-    {% if session.user_id %}
-        Olet kirjautunut sisään nimellä <em>{{ session.username }}</em>. <a href="/">Palaa etusivulle</a> <a href="/logout">Kirjaudu ulos</a>
-        
-    {% else %}
-        Kirjaudu sisään osallistuaksesi keskusteluun.
-        <a href="/login">Kirjaudu sisään</a> <a href="/">Palaa etusivulle</a>
-    {% endif %}
-</div>
-
 <div class="content">
     <h2>{{ subject }}</h2>
 
