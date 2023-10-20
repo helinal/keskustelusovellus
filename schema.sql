@@ -29,3 +29,11 @@ CREATE TABLE messages (
     chain_id INTEGER REFERENCES chains,
     visible BOOLEAN
 );
+
+CREATE TABLE likes (
+    id SERIAL PRIMARY KEY,
+    liketype VARCHAR(10),
+    user_id INTEGER REFERENCES users,
+    message_id integer REFERENCES messages,
+    CONSTRAINT unique_like_dislike UNIQUE (user_id, message_id)
+);

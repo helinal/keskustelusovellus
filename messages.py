@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 
 def get_list(id):
     list = []
-    sql = text("SELECT M.content, U.username, M.sent_at FROM messages M, users U, chains C WHERE M.chain_id=:id AND M.user_id=U.id AND M.visible=TRUE ORDER BY M.id DESC")
+    sql = text("SELECT M.id, M.content, U.username, M.sent_at FROM messages M, users U, chains C WHERE M.chain_id=:id AND M.user_id=U.id AND M.visible=TRUE ORDER BY M.id DESC")
     results = db.session.execute(sql, {"id":id}).fetchall()
     for result in results:
         if result in list:
@@ -47,3 +47,24 @@ def delete_message(id, user_id):
     sql = text("UPDATE messages SET visible=FALSE WHERE id=:id AND user_id=:user_id")
     db.session.execute(sql, {"id":id, "user_id":user_id})
     db.session.commit()
+
+def add_like(liketype, user_id, message_id):
+    sql_update = text("INSERT INTO likes (liketype, user_id, message_id) VALUES (:liketype, :user_id, :message_id)")
+    db.session.execute(sql_update, {'liketype':liketype, 'user_id':user_id, 'message_id':message_id})
+    db.session.commit()
+    return True
+
+def likecount(message_id):
+    sql = text("SELECT COUNT(*) FROM likes WHERE message_id =:message_id AND liketype='like'")
+    result = db.session.execute(sql, {'message_id':message_id})
+    return result
+
+def dislikecount(message_id):
+    sql = text("SELECT COUNT(*) FROM likes WHERE message_id =:message_id AND liketype ='dislike'")
+    result = db.session.execute(sql, {'message_id':message_id})
+    return result
+
+def check_like(message_id, user_id):
+    sql = text("SELECT 1 FROM likes WHERE message_id =:message_id AND user_id =:user_id")
+    result = db.session.execute(sql, {'message_id':message_id, 'user_id':user_id})
+    return result.fetchone()

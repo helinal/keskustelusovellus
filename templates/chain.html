@@ -50,13 +50,33 @@
     <div class="message">
         <p>
         <div class="singlemessage">
-            {{ message[0] }}
+            {{ message[1] }}
         </div>
         <p>
-        Lähettäjä: {{ message[1] }} <br>
-        Lähetetty: {{ message[2] }}
+        Lähettäjä: {{ message[2] }} <br>
+        Lähetetty: {{ message[3] }}
         <p>
+
         {% if session.user_id %}
+        <span>
+            <form method="POST" action="{{ url_for('like_message', message_id=message.id) }}" style="display: inline;">
+                <input type="hidden" name="action" value="like">
+                <button class="likebutton" type="submit">
+                    <img src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25859_1280.png" alt="buttonpng" border="0" />
+                </button>
+            </form>
+        </span>
+        <span style="font-size:20px; position:relative; top:-7px" class="like.count">{{ likecounts[loop.index-1] }}</span> 
+        <span>
+            <form method="POST" action="{{ url_for('like_message', message_id=message.id) }}" style="display: inline;">
+                <input type="hidden" name="action" value="dislike">
+                <button class="dislikebutton" type="submit">
+                    <img src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25857_1280.png" alt="buttonpng" border="0" />
+                </button>
+            </form>
+            <span style="font-size:20px; position:relative; top:-7px" class="dislike.count">{{ dislikecounts[loop.index-1] }}</span>
+        </span>
+        <p>
         <a href="/edit_message">Muokkaa viestiä</a>
         <a href="/delete_message">Poista viesti</a>
         

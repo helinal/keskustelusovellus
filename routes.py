@@ -82,7 +82,17 @@ def chain(id):
     subject = chains.get_subject(id)
     first_message = chains.get_first_message(id)
     list = messages.get_list(id)
-    return render_template("chain.html", id=id, subject=subject, first_message=first_message, count=len(list), messages=list)
+
+    likecounts = []
+    dislikecounts = []
+
+    for message in list:
+        likecount = messages.likecount(message.id)
+        dislikecount = messages.dislikecount(message.id)
+        likecounts.append(likecount.scalar())
+        dislikecounts.append(dislikecount.scalar())
+
+    return render_template("chain.html", id=id, subject=subject, first_message=first_message, count=len(list), messages=list, likecounts=likecounts, dislikecounts=dislikecounts)
 
 @app.route("/area/<int:id>")
 def area(id):
@@ -194,3 +204,16 @@ def delete_chain():
             chain_id = request.form["chain"]
             chains.delete_chain(chain_id, users.user_id())
         return redirect("/")
+    
+@app.route('/like-message/<int:message_id>', methods=['POST'])
+def like_message(message_id):
+    action = request.form.get('action')
+    if action == "like" or "dislike":
+        user_id = users.user_id()
+        like_check = messages.check_like(message_id, user_id)
+
+        if like_check:
+            return render_template("error.html", message = "Olet jo arvostellut tämän viestin")
+        
+        messages.add_like(action, user_id, message_id)
+    return redirect("/")

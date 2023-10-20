@@ -7,7 +7,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-color: #cccccc;
+    background-color: rgb(61, 80, 124);
 }
 
 .header {
@@ -61,4 +61,31 @@ a {
     padding: 0.35em 0.5em;
     border-radius: .5em;
     margin-top: .5em;
+}
+
+button{
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+    transition: transform .7s ease-in-out;
+    margin-left: 5px;
+}
+
+button:hover {
+    transform: rotate(360deg);
+}
+  
+img {
+    width: 25px;
+    height: 25px;
+}
+
+.like.count {
+    font-size: large;
+    color: blueviolet;
+}
+
+.dislike.count {
+    font-size: large;
 }
