@@ -9,12 +9,13 @@
         Valitse poistettava viesti:
         <p>
         {% for message in list %}
-        {% if message.visible == TRUE %}
-        <input type="radio" name="message" value="{{ message.id }}" required> {{ message.content }}, <em>lähetetty: {{message.sent_at}}</em> 
-        <br>
-        {% endif %}
+            {% if message.visible == TRUE %}
+            <input type="radio" name="message" value="{{ message.id }}" required> {{ message.content }}, <em>lähetetty: {{message.sent_at}}</em> 
+            <br>
+            {% endif %}
         {% endfor %}
         <p>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
         <input id="formbutton" type="submit" value="Poista viesti">
     </form>
     

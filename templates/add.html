@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Keskustelualue{% endblock %}
+{% block title %}Uusi keskustelualue{% endblock %}
 {% block content %}
 
 <div class="content">
@@ -10,7 +10,7 @@
         <p>
         <input type="text" name="name"> <p>
         <input id="formbutton" type="submit" value="Luo uusi alue">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
     </form>
     
     <a href="/">Palaa etusivulle</a> 

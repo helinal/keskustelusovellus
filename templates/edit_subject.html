@@ -6,18 +6,19 @@
     <h3>Muokkaa ketjun otsikkoa</h3>
 
     {% if list %}
-    Minkä ketjun otsikkoa muutetaan?
-    <form action="/edit_subject" method="POST">
-        {% for chain in list %}
-            <input type="radio" name="chain" value="{{ chain.id }}" required> {{ chain.subject }} <br>
-        {% endfor %}
+        Minkä ketjun otsikkoa muutetaan?
+        <form action="/edit_subject" method="POST">
+            {% for chain in list %}
+                <input type="radio" name="chain" value="{{ chain.id }}" required> {{ chain.subject }} <br>
+            {% endfor %}
 
-        <p>
-        Anna uusi otsikko: <br>
-        <input type="text" name="subject" required>
-        <p>
-        <input id="formbutton" type="submit" value="Muuta otsikko">
-    </form>
+            <p>
+            Anna uusi otsikko: <br>
+            <input type="text" name="subject" required>
+            <p>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
+            <input id="formbutton" type="submit" value="Muuta otsikko">
+        </form>
 
     {% else %}
         Et ole vielä luonut omia viestiketjuja, joiden otsikkoa voisit muokata. <p>

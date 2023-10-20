@@ -4,11 +4,11 @@
 
 <div class="login">
     {% if session.user_id %}
-    Olet kirjautunut sisään nimellä <em>{{ session.username }}</em>. <a href="/">Palaa etusivulle</a> <a href="/logout">Kirjaudu ulos</a>
+        Olet kirjautunut sisään nimellä <em>{{ session.username }}</em>. <a href="/">Palaa etusivulle</a> <a href="/logout">Kirjaudu ulos</a>
         
     {% else %}
-    Kirjaudu sisään osallistuaksesi keskusteluun.
-    <a href="/login">Kirjaudu sisään</a> <a href="/">Palaa etusivulle</a>
+        Kirjaudu sisään osallistuaksesi keskusteluun.
+        <a href="/login">Kirjaudu sisään</a> <a href="/">Palaa etusivulle</a>
     {% endif %}
 </div>
 
@@ -16,9 +16,8 @@
     <h2>{{ subject }}</h2>
 
     {% if session.user_id %}
-    <a href="/edit_subject">Muokkaa otsikkoa</a>
-    <a href="/delete_chain">Poista ketju</a>
-
+        <a href="/edit_subject">Muokkaa otsikkoa</a>
+        <a href="/delete_chain">Poista ketju</a>
     {% endif %}
 
     <p>
@@ -34,55 +33,54 @@
 
 <div class="content">
     {% if session.user_id %}
-    <form action="/send" method="POST">
-        <h4>Lisää uusi viesti</h4>
-        <textarea name="content" rows="3" cols="40"></textarea>
-        <input type="hidden" name="chain_id" value="{{ id }}">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <p>
-        <input id="formbutton" type="submit" value="Lähetä">
-    </form>
+        <form action="/send" method="POST">
+            <h4>Lisää uusi viesti</h4>
+            <textarea name="content" rows="3" cols="40"></textarea>
+            <input type="hidden" name="chain_id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <p>
+            <input id="formbutton" type="submit" value="Lähetä">
+        </form>
     {% endif %}
 </div>
 
 {% if messages %}
-{% for message in messages %}
-    <div class="message">
-        <p>
-        <div class="singlemessage">
-            {{ message[1] }}
-        </div>
-        <p>
-        Lähettäjä: {{ message[2] }} <br>
-        Lähetetty: {{ message[3] }}
-        <p>
+    {% for message in messages %}
+        <div class="message">
+            <p>
+            <div class="singlemessage">
+                {{ message[1] }}
+            </div>
+            <p>
+            Lähettäjä: {{ message[2] }} <br>
+            Lähetetty: {{ message[3] }}
+            <p>
 
-        {% if session.user_id %}
-        <span>
-            <form method="POST" action="{{ url_for('like_message', message_id=message.id) }}" style="display: inline;">
-                <input type="hidden" name="action" value="like">
-                <button class="likebutton" type="submit">
-                    <img src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25859_1280.png" alt="buttonpng" border="0" />
-                </button>
-            </form>
-        </span>
-        <span style="font-size:20px; position:relative; top:-7px" class="like.count">{{ likecounts[loop.index-1] }}</span> 
-        <span>
-            <form method="POST" action="{{ url_for('like_message', message_id=message.id) }}" style="display: inline;">
-                <input type="hidden" name="action" value="dislike">
-                <button class="dislikebutton" type="submit">
-                    <img src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25857_1280.png" alt="buttonpng" border="0" />
-                </button>
-            </form>
-            <span style="font-size:20px; position:relative; top:-7px" class="dislike.count">{{ dislikecounts[loop.index-1] }}</span>
-        </span>
-        <p>
-        <a href="/edit_message">Muokkaa viestiä</a>
-        <a href="/delete_message">Poista viesti</a>
-        
-        {% endif %}
-    </div>
-{% endfor %}
+            {% if session.user_id %}
+            <span>
+                <form method="POST" action="{{ url_for('like_message', message_id=message.id) }}" style="display: inline;">
+                    <input type="hidden" name="action" value="like">
+                    <button class="likebutton" type="submit">
+                        <img src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25859_1280.png" alt="buttonpng" border="0" />
+                    </button>
+                </form>
+            </span>
+            <span style="font-size:20px; position:relative; top:-7px" class="like.count">{{ likecounts[loop.index-1] }}</span> 
+            <span>
+                <form method="POST" action="{{ url_for('like_message', message_id=message.id) }}" style="display: inline;">
+                    <input type="hidden" name="action" value="dislike">
+                    <button class="dislikebutton" type="submit">
+                        <img src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25857_1280.png" alt="buttonpng" border="0" />
+                    </button>
+                </form>
+                <span style="font-size:20px; position:relative; top:-7px" class="dislike.count">{{ dislikecounts[loop.index-1] }}</span>
+            </span>
+            <p>
+            <a href="/edit_message">Muokkaa viestiä</a>
+            <a href="/delete_message">Poista viesti</a>
+            {% endif %}
+        </div>
+    {% endfor %}
 
 {% else %}
     <div class="message">
@@ -92,7 +90,6 @@
         </div>
         <p>
     </div>
-
 {% endif %}
 
 {% endblock %}

@@ -6,20 +6,19 @@
     <h2>Poista keskustelualue</h2>
 
     {% if list %}
-
-    <form action="/remove" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän keskustelualueen?')">
-        Valitse poistettava alue:
-        <p>
-        {% for area in list %}
-        {% if area.visible == TRUE %}
-        <input type="radio" name="area" value="{{ area.id }}"> {{ area.name }}
-        <br>
-        {% endif %}
-        {% endfor %}
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <p>
-        <input id="formbutton" type="submit" value="Poista alue">
-    </form>
+        <form action="/remove" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän keskustelualueen?')">
+            Valitse poistettava alue:
+            <p>
+            {% for area in list %}
+                {% if area.visible == TRUE %}
+                    <input type="radio" name="area" value="{{ area.id }}"> {{ area.name }}
+                    <br>
+                {% endif %}
+            {% endfor %}
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <p>
+            <input id="formbutton" type="submit" value="Poista alue">
+        </form>
 
     {% else %}
         Et ole vielä luonut alueita, joita voisit poistaa. Voit poistaa vain omia alueitasi. <p>

@@ -9,12 +9,13 @@
         Valitse poistettava ketju:
         <p>
         {% for chain in list %}
-        {% if chain.visible == TRUE %}
-        <input type="radio" name="chain" value="{{ chain.id }}" required> {{ chain.subject }}
-        <br>
-        {% endif %}
+            {% if chain.visible == TRUE %}
+                <input type="radio" name="chain" value="{{ chain.id }}" required> {{ chain.subject }}
+                <br>
+            {% endif %}
         {% endfor %}
         <p>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
         <input id="formbutton" type="submit" value="Poista ketju">
     </form>
     

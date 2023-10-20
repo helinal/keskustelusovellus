@@ -4,7 +4,6 @@ import messages, users, areas, chains
 from db import db
 from sqlalchemy.sql import text
 
-
 @app.route("/")
 def index():
     list_areas = areas.get_list()
@@ -96,7 +95,8 @@ def chain(id):
         likecounts.append(likecount.scalar())
         dislikecounts.append(dislikecount.scalar())
 
-    return render_template("chain.html", id=id, subject=subject, first_message=first_message, count=len(list), messages=list, likecounts=likecounts, dislikecounts=dislikecounts)
+    return render_template("chain.html", id=id, subject=subject, first_message=first_message,
+                            count=len(list), messages=list, likecounts=likecounts, dislikecounts=dislikecounts)
 
 @app.route("/area/<int:id>")
 def area(id):
@@ -111,6 +111,7 @@ def login():
     if request.method == "GET":
         return render_template("login.html")
     if request.method == "POST":
+        users.check_csrf()
         username = request.form["username"]
         password = request.form["password"]
         if users.login(username, password):
@@ -130,6 +131,7 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     if request.method == "POST":
+        users.check_csrf()
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
@@ -169,6 +171,7 @@ def edit_subject():
         return render_template("edit_subject.html", list=list)
 
     if request.method == "POST":
+        users.check_csrf()
         if "chain" in request.form:
             chain_id = request.form["chain"]
             subject = request.form["subject"]
@@ -183,6 +186,7 @@ def edit_message():
         return render_template("edit_message.html", list=list)
 
     if request.method == "POST":
+        users.check_csrf()
         if "message" in request.form:
             message_id= request.form["message"]
             content = request.form["newmessage"]
@@ -197,6 +201,7 @@ def delete_message():
         return render_template("delete_message.html", list=list)
     
     if request.method == "POST":
+        users.check_csrf()
         if "message" in request.form:
             message_id = request.form["message"]
             messages.delete_message(message_id, users.user_id())
@@ -210,15 +215,16 @@ def delete_chain():
         return render_template("delete_chain.html", list=list)
     
     if request.method == "POST":
+        users.check_csrf()
         if "chain" in request.form:
             chain_id = request.form["chain"]
             chains.delete_chain(chain_id, users.user_id())
             flash("Ketju poistettu")
         return redirect("/")
     
-@app.route('/like-message/<int:message_id>', methods=['POST'])
+@app.route("/like-message/<int:message_id>", methods=["POST"])
 def like_message(message_id):
-    action = request.form.get('action')
+    action = request.form.get("action")
     if action == "like" or "dislike":
         user_id = users.user_id()
         like_check = messages.check_like(message_id, user_id)

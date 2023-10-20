@@ -9,18 +9,16 @@
     <p>
     
     {% if messages_found %}
-
-    {% for m in messages_found %} 
-    <div class="singlemessage">
-        {{ m.content }}
-    </div>
-    lähetetty: {{ m.sent_at }}
-    <hr>
-    {% endfor %}
+        {% for m in messages_found %} 
+            <div class="singlemessage">
+                {{ m.content }}
+            </div>
+            lähetetty: {{ m.sent_at }}
+            <hr>
+        {% endfor %}
 
     {% else %}
-    Hakusanalla ei löytynyt viestejä.
-
+        Hakusanalla ei löytynyt viestejä.
     {% endif %}
     
     <p>

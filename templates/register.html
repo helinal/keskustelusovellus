@@ -18,6 +18,7 @@
             <option value=2> Ylläpitäjä    
         </select>
         <p>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
         <input id="formbutton" type="submit" value="Luo uusi tunnus">
     </form>
     

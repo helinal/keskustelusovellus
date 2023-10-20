@@ -5,56 +5,50 @@
 <body>
     <div class="login">
         {% if session.username %}
-        Hei <em>{{ session.username }}</em>! Olet kirjautunut sisään. <a href="/logout">Kirjaudu ulos</a>
+            Hei <em>{{ session.username }}</em>! Olet kirjautunut sisään. <a href="/logout">Kirjaudu ulos</a>
         
         {% else %}
-        Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
+            Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
         {% endif %}
     </div>
-
-    {% if message %}
-    <br>{{ message }}<br>
-    {% endif %}
    
     <div class="content">
-
         <p>
         <a href="/search">Etsi viestejä</a>
         <p>
         Keskustelualueita yhteensä: {{ count }}
 
         {% for area in areas %}
-        <h2>{{ area[1] }}</h2>
-        {% for chain in chains %}
-        {% for tuple in chain %}
-        {% if tuple[0] == area[0] %}
-        <p>
-        Ketjujen määrä alueella: {{ tuple[1] }} <br>
-        {% for message in messages %}
-        {% for tuple in message %}
-        {% if tuple[0] == area[0] %}
-        Viestien määrä alueella: {{ tuple[1] }}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-        <p>
-        <a href="/area/{{ area[0] }}">Siirry alueelle</a>
-        <hr>
+            <h2>{{ area[1] }}</h2>
+            {% for chain in chains %}
+                {% for tuple in chain %}
+                    {% if tuple[0] == area[0] %}
+                    <p>
+                    Ketjujen määrä alueella: {{ tuple[1] }} <br>
+                        {% for message in messages %}
+                            {% for tuple in message %}
+                                {% if tuple[0] == area[0] %}
+                                Viestien määrä alueella: {{ tuple[1] }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            <p>
+            <a href="/area/{{ area[0] }}">Siirry alueelle</a>
+            <hr>
         {% endfor %}
     </div>
 
     <div class="content">
         {% if session.user_role == 2 %}
-        <h4>Ylläpitäjän toiminnot</h4>
-        <a href="/add">Luo uusi keskustelualue</a>
-        <a href="/remove">Poista keskustelualue</a>
-        <p>
+            <h4>Ylläpitäjän toiminnot</h4>
+            <a href="/add">Luo uusi keskustelualue</a>
+            <a href="/remove">Poista keskustelualue</a>
+            <p>
         {% endif %} 
     </div>
-    
 </body>
 
 {% endblock %}

@@ -3,7 +3,8 @@ import users
 from sqlalchemy.sql import text
 
 def get_list():
-    sql = text("SELECT C.subject, C.first_message, U.username, C.area_id FROM chains C, users U WHERE C.user_id=U.id AND visible=TRUE ORDER BY C.id DESC")
+    sql = text("SELECT C.subject, C.first_message, U.username, C.area_id " \
+               "FROM chains C, users U WHERE C.user_id=U.id AND visible=TRUE ORDER BY C.id DESC")
     result = db.session.execute(sql)
     return result.fetchall()
 
@@ -28,7 +29,8 @@ def get_own_chains(user_id):
 
 def create(area_id, subject, first_message):
     user_id = users.user_id()
-    sql = text("INSERT INTO chains (area_id, subject, first_message, user_id, visible) VALUES (:area_id, :subject, :first_message, :user_id, TRUE)")
+    sql = text("INSERT INTO chains (area_id, subject, first_message, user_id, visible) " \
+               "VALUES (:area_id, :subject, :first_message, :user_id, TRUE)")
     db.session.execute(sql, {"area_id":area_id, "subject":subject, "first_message":first_message, "user_id":user_id})
     db.session.commit()
 

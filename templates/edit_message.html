@@ -6,20 +6,20 @@
     <h3>Muokkaa lähettämääsi viestiä</h3>
 
     {% if list %}
-
-    Mitä viestiä haluat muokata?
-    <p>
-    <form action="/edit_message" method="POST">
-        {% for message in list %}
-        <input type="radio" name="message" value="{{ message.id }}" required> 
-        {{ message.content }}, <em>lähetetty: {{message.sent_at}}</em> <p>
-        {% endfor %}
-
-        Anna muokattu viesti: <br>
-        <textarea name="newmessage" required rows="3" cols="40"></textarea>
+        Mitä viestiä haluat muokata?
         <p>
-        <input id="formbutton" type="submit" value="Muokkaa viestiä">
-    </form>
+        <form action="/edit_message" method="POST">
+            {% for message in list %}
+                <input type="radio" name="message" value="{{ message.id }}" required> 
+                {{ message.content }}, <em>lähetetty: {{message.sent_at}}</em> <p>
+            {% endfor %}
+
+            Anna muokattu viesti: <br>
+            <textarea name="newmessage" required rows="3" cols="40"></textarea>
+            <p>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"/>
+            <input id="formbutton" type="submit" value="Muokkaa viestiä">
+        </form>
 
     {% else %}
         Et ole vielä kirjoittanut omia viestejä, joiden sisältöä voisit muokata. <p>

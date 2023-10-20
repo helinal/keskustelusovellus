@@ -4,29 +4,30 @@
 
 <div class="login">
     {% if session.user_id %}
-    Olet kirjautunut sisään nimellä <em>{{ session.username }}</em>. <a href="/">Palaa etusivulle</a>
-    <a href="/logout">Kirjaudu ulos</a>
+        Olet kirjautunut sisään nimellä <em>{{ session.username }}</em>. <a href="/">Palaa etusivulle</a>
+        <a href="/logout">Kirjaudu ulos</a>
         
     {% else %}
-    Kirjaudu sisään luodaksesi uuden keskustelualueen.
-    <a href="/login">Kirjaudu sisään</a> <a href="/">Palaa etusivulle</a>
+        Kirjaudu sisään luodaksesi uuden keskustelualueen.
+        <a href="/login">Kirjaudu sisään</a> <a href="/">Palaa etusivulle</a>
     {% endif %}
 </div>
 
 <div class="content">
     {% if session.user_id %}
-    <p>
-    <h4>Luo uusi viestiketju</h4>
-    <form action="/create" method="POST">
-        <p>Otsikko:<br>
-        <input type="text" name="subject">
-        <p>Aloitusviesti:<br>
-        <textarea name="first_message" rows="3" cols="40"></textarea>
-        <input type="hidden" name="area_id" value="{{ id }}">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <p>
-        <input id="formbutton" type="submit" value="Luo ketju">
-    </form>
+        <h4>Luo uusi viestiketju</h4>
+
+        <form action="/create" method="POST">
+            <p>Otsikko:<br>
+            <input type="text" name="subject">
+            <p>Aloitusviesti:<br>
+            <textarea name="first_message" rows="3" cols="40"></textarea>
+            <input type="hidden" name="area_id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <p>
+            <input id="formbutton" type="submit" value="Luo ketju">
+        </form>
     {% endif %}
 </div>
 
@@ -35,20 +36,19 @@
     <hr>
 
     {% if chains %}
-    {% for chain in chains %}
-    <p>
-    <h3>{{ chain[1] }}</h3>
-    <p>
-    {{ chain[2] }}
-    <p>
-    <a href="/chain/{{ chain[0] }}">Avaa ketju</a> <br>
-    <hr>
-    {% endfor %}
+        {% for chain in chains %}
+        <p>
+        <h3>{{ chain[1] }}</h3>
+        <p>
+        {{ chain[2] }}
+        <p>
+        <a href="/chain/{{ chain[0] }}">Avaa ketju</a> <br>
+        <hr>
+        {% endfor %}
 
     {% else %}
-    Alueella ei ole vielä viestiketjuja.
-    <p>
-    
+        Alueella ei ole vielä viestiketjuja.
+        <p>
     {% endif %}
 </div>
 
