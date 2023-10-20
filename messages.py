@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 
 def get_list(id):
     list = []
-    sql = text("SELECT M.content, U.username, M.sent_at FROM messages M, users U, chains C WHERE M.chain_id=:id AND M.user_id=U.id ORDER BY M.id DESC")
+    sql = text("SELECT M.content, U.username, M.sent_at FROM messages M, users U, chains C WHERE M.chain_id=:id AND M.user_id=U.id AND M.visible=TRUE ORDER BY M.id DESC")
     results = db.session.execute(sql, {"id":id}).fetchall()
     for result in results:
         if result in list:
@@ -14,7 +14,7 @@ def get_list(id):
     return list
 
 def get_own_messages(user_id):
-    sql = text("SELECT id, content, sent_at FROM messages WHERE user_id=:user_id AND visible=TRUE ORDER BY id")
+    sql = text("SELECT id, content, sent_at FROM messages WHERE user_id=:user_id AND visible=TRUE ORDER BY sent_at DESC")
     return db.session.execute(sql, {"user_id":user_id}).fetchall()
 
 def send(content, chain_id):
@@ -43,7 +43,7 @@ def edit_message(id, content):
     db.session.execute(sql, {"id":id, "content":content})
     db.session.commit()
 
-def remove_message(id, user_id):
+def delete_message(id, user_id):
     sql = text("UPDATE messages SET visible=FALSE WHERE id=:id AND user_id=:user_id")
     db.session.execute(sql, {"id":id, "user_id":user_id})
     db.session.commit()

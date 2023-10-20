@@ -21,8 +21,8 @@ def send():
     content = request.form["content"]
     if len(content.strip()) == 0:
         return render_template('error.html', message='Viesti ei voi olla tyhjä')
-    if len(content.strip()) > 200:
-        return render_template('error.html', message='Liian pitkä viesti. Viestin tulee olla 1-200 merkkiä pitkä.')
+    if len(content.strip()) > 450:
+        return render_template('error.html', message='Liian pitkä viesti. Viestin tulee olla 1-450 merkkiä pitkä.')
 
     chain_id = request.form["chain_id"]
     if messages.send(content, chain_id):
@@ -66,8 +66,8 @@ def create_chain():
             return render_template("error.html", message="Otsikon tulee olla 1-50 merkkiä pitkä")
         
         first_message = request.form["first_message"]
-        if len(first_message) < 1 or len(first_message) > 200:
-            return render_template("error.html", message="Aloitusviestin tulee olla 1-200 merkkiä pitkä")
+        if len(first_message) < 1 or len(first_message) > 300:
+            return render_template("error.html", message="Aloitusviestin tulee olla 1-300 merkkiä pitkä")
     
         area_id = request.form["area_id"]
 
@@ -87,7 +87,7 @@ def chain(id):
 @app.route("/area/<int:id>")
 def area(id):
     name = areas.get_name(id)
-    sql = text("SELECT id, subject, first_message FROM chains WHERE area_id=:id")
+    sql = text("SELECT id, subject, first_message FROM chains WHERE area_id=:id AND visible=TRUE ORDER BY id DESC")
     result = db.session.execute(sql, {"id":id})
     chains = result.fetchall()
     return render_template("area.html", id=id, name=name, chains=chains)
@@ -169,4 +169,28 @@ def edit_message():
             message_id= request.form["message"]
             content = request.form["newmessage"]
             messages.edit_message(message_id, content)
+        return redirect("/")
+    
+@app.route("/delete_message", methods=["GET", "POST"])
+def delete_message():
+    if request.method == "GET":
+        list = messages.get_own_messages(users.user_id())
+        return render_template("delete_message.html", list=list)
+    
+    if request.method == "POST":
+        if "message" in request.form:
+            message_id = request.form["message"]
+            messages.delete_message(message_id, users.user_id())
+        return redirect("/")
+    
+@app.route("/delete_chain", methods=["GET", "POST"])
+def delete_chain():
+    if request.method == "GET":
+        list = chains.get_own_chains(users.user_id())
+        return render_template("delete_chain.html", list=list)
+    
+    if request.method == "POST":
+        if "chain" in request.form:
+            chain_id = request.form["chain"]
+            chains.delete_chain(chain_id, users.user_id())
         return redirect("/")

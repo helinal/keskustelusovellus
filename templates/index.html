@@ -21,12 +21,11 @@
 
         {% for area in areas %}
         <h2>{{ area[1] }}</h2>
-        <p>
         {% for chain in chains %}
         {% for tuple in chain %}
         {% if tuple[0] == area[0] %}
         <p>
-        Ketjujen määrä alueella: {{ tuple[1] }} |
+        Ketjujen määrä alueella: {{ tuple[1] }} <br>
         {% for message in messages %}
         {% for tuple in message %}
         {% if tuple[0] == area[0] %}

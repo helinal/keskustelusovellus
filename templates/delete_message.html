@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Poista viesti{% endblock %}
+{% block content %}
+
+<div class="content">
+    <h2>Poista viestejäsi</h2>
+
+    <form action="/delete_message" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän viestin?')">
+        Valitse poistettava viesti:
+        <p>
+        {% for message in list %}
+        {% if message.visible == TRUE %}
+        <input type="radio" name="message" value="{{ message.id }}" required> {{ message.content }}
+        <br>
+        {% endif %}
+        {% endfor %}
+        <p>
+        <input type="submit" value="Poista viesti">
+    </form>
+    
+    <a href="/">Palaa etusivulle</a>
+    <p>
+</div>
+
+{% endblock %}

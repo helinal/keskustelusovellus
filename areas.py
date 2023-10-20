@@ -2,7 +2,7 @@ from db import db
 from sqlalchemy.sql import text
 
 def get_list():
-    sql = text("SELECT id, name FROM areas WHERE visible=TRUE ORDER BY id")
+    sql = text("SELECT id, name FROM areas WHERE visible=TRUE ORDER BY id DESC")
     result = db.session.execute(sql)
     return result.fetchall()
 
@@ -12,7 +12,7 @@ def get_name(id):
     return result.fetchone()[0]
 
 def get_own_areas(user_id):
-    sql = text("SELECT id, name FROM areas WHERE user_id=:user_id AND visible=TRUE ORDER BY name")
+    sql = text("SELECT id, name FROM areas WHERE user_id=:user_id AND visible=TRUE ORDER BY id DESC")
     return db.session.execute(sql, {"user_id":user_id}).fetchall()
 
 def add_area(name, user_id):

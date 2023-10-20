@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Poista ketju{% endblock %}
+{% block content %}
+
+<div class="content">
+    <h2>Poista viestiketju</h2>
+
+    <form action="/delete_chain" method="POST" onsubmit="return window.confirm('Haluatko varmasti poistaa tämän ketjun?')">
+        Valitse poistettava ketju:
+        <p>
+        {% for chain in list %}
+        {% if chain.visible == TRUE %}
+        <input type="radio" name="chain" value="{{ chain.id }}" required> {{ chain.subject }}
+        <br>
+        {% endif %}
+        {% endfor %}
+        <p>
+        <input type="submit" value="Poista ketju">
+    </form>
+    
+    <a href="/">Palaa etusivulle</a>
+    <p>
+</div>
+
+{% endblock %}

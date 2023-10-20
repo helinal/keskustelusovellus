@@ -2,11 +2,16 @@ body {
     margin: auto;
     max-width: 45em;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: rgb(82, 114, 99);
+    background: url("https://images.pexels.com/photos/7130482/pexels-photo-7130482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: #cccccc;
 }
 
 .header {
-    background: rgba(148, 151, 151, 0.863);
+    background: rgba(94, 121, 185, 0.644);
     font-weight: bold;
     padding: 0.3em 0.3em;
     font-size: 1.4em;
@@ -17,7 +22,7 @@ body {
 }
 
 .login {
-    background-color: rgb(203, 204, 204);
+    background-color: rgb(215, 217, 218);
     padding: 1em 0.5em;
     border-radius: .5em;
     margin-top: .5em;
@@ -52,7 +57,7 @@ body {
 a {
     text-decoration: none;
     color: #000;
-    background-color: rgb(147, 179, 163);
+    background-color: rgb(182, 195, 224);
     padding: 0.35em 0.5em;
     border-radius: .5em;
     margin-top: .5em;
