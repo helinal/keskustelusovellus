@@ -8,8 +8,8 @@
     <form action="/add" method="POST">
         Anna keskustelualueen nimi:
         <p>
-        <input type="text" name="name">
-        <input type="submit" value="Luo uusi alue">
+        <input type="text" name="name"> <p>
+        <input id="formbutton" type="submit" value="Luo uusi alue">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     </form>
     

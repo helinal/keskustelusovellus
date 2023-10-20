@@ -114,7 +114,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if users.login(username, password):
-            flash("Kirjauduit sisään")
+            flash("Kirjauduttu sisään")
             return redirect("/")
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
@@ -122,7 +122,7 @@ def login():
 @app.route("/logout")
 def logout():
     users.logout()
-    flash("Kirjauduit ulos")
+    flash("Kirjauduttu ulos")
     return redirect("/")
 
 @app.route("/register", methods=["GET","POST"])

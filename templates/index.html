@@ -49,11 +49,9 @@
     <div class="content">
         {% if session.user_role == 2 %}
         <h4>Ylläpitäjän toiminnot</h4>
-        <ul>
-            <li><a href="/add">Luo uusi keskustelualue</a></li>
-            <p>
-            <li><a href="/remove">Poista keskustelualue</a></li>
-        </ul>
+        <a href="/add">Luo uusi keskustelualue</a>
+        <a href="/remove">Poista keskustelualue</a>
+        <p>
         {% endif %} 
     </div>
     

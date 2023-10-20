@@ -1,6 +1,6 @@
 body {
     margin: auto;
-    max-width: 45em;
+    max-width: 55em;
     font-family: Georgia, 'Times New Roman', Times, serif;
     background: url("https://images.pexels.com/photos/7130482/pexels-photo-7130482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -63,6 +63,10 @@ a {
     margin-top: .5em;
 }
 
+a:hover {
+    background-color: rgb(156, 167, 192);
+}
+
 button{
     border: none;
     cursor: pointer;
@@ -81,19 +85,38 @@ img {
     height: 25px;
 }
 
-.like.count {
-    font-size: large;
-    color: blueviolet;
-}
-
-.dislike.count {
-    font-size: large;
-}
-
 .flashes {
     padding: 1em 0.5em;
     border-radius: .5em;
     margin-top: .5em;
     color: #270;
     background-color: #DFF2BF;
+}
+
+form #formbutton {
+    text-decoration: none;
+    color: #000;
+    background-color: #cdcdcf;
+    border: none;
+    padding: 0.5em 0.5em;
+    border-radius: .5em;
+    margin-top: .5em;
+}
+
+form #formbutton:hover {
+    background-color: rgb(133, 142, 163);
+}
+
+select {
+    width: 40%;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 50px;
+    background-color: #f1f1f1;
+}
+
+ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
 }

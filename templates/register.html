@@ -5,7 +5,7 @@
 <div class="content">
     <h2>Rekisteröidy</h2>
 
-    <form action="/register" method="post">
+    <form action="/register" method="POST">
         Tunnus: <input type="text" name="username">
         <p>
         Salasana: <input type="password" name="password1">
@@ -18,7 +18,7 @@
             <option value=2> Ylläpitäjä    
         </select>
         <p>
-        <input type="submit" value="Luo uusi tunnus">
+        <input id="formbutton" type="submit" value="Luo uusi tunnus">
     </form>
     
     <a href="/login">Palaa takaisin</a>

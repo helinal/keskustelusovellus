@@ -5,11 +5,12 @@
 <div class="content">
     <h2>Kirjaudu sisään</h2>
 
-    <form action="/login" method="post">
+    <form action="/login" method="POST">
         Tunnus: <input type="text" name="username">
         <p>
         Salasana: <input type="password" name="password">
-        <input type="submit" value="Kirjaudu">
+        <p>
+        <input id="formbutton" type="submit" value="Kirjaudu">
     </form>
 
     Jos sinulla ei ole tunnusta, luo uusi tunnus <a href="/register">tästä</a>
