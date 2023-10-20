@@ -11,6 +11,10 @@
         Et ole kirjautunut sisään. <a href="/login">Kirjaudu sisään</a>
         {% endif %}
     </div>
+
+    {% if message %}
+    <br>{{ message }}<br>
+    {% endif %}
    
     <div class="content">
 

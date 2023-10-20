@@ -89,3 +89,11 @@ img {
 .dislike.count {
     font-size: large;
 }
+
+.flashes {
+    padding: 1em 0.5em;
+    border-radius: .5em;
+    margin-top: .5em;
+    color: #270;
+    background-color: #DFF2BF;
+}

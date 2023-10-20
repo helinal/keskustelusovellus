@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import flash, render_template, request, redirect
 import messages, users, areas, chains
 from db import db
 from sqlalchemy.sql import text
@@ -26,6 +26,7 @@ def send():
 
     chain_id = request.form["chain_id"]
     if messages.send(content, chain_id):
+        flash("Viesti lähetetty")
         return redirect("/chain/"+chain_id)
     else:
         return render_template("error.html", message="Viestin lähetys ei onnistunut")
@@ -42,6 +43,7 @@ def add_area():
             return render_template("error.html", message="Keskustelualueen nimen tulee olla 1-25 merkkiä pitkä")
 
         areas.add_area(name, users.user_id())
+        flash("Keskustelualue luotu")
         return redirect("/")
     
 @app.route("/remove", methods=["GET", "POST"])
@@ -55,6 +57,7 @@ def remove():
         if "area" in request.form:
             area_id = request.form["area"]
             areas.remove_area(area_id, users.user_id())
+            flash("Viestialue poistettu")
         return redirect("/")
 
 @app.route("/create", methods=["POST"])
@@ -75,6 +78,7 @@ def create_chain():
             render_template("error.html", message="Ketjun luominen ei onnistunut")
         else:
             chains.create(area_id, subject, first_message)
+            flash("Viestiketju luotu")
             return redirect("/area/"+area_id)
 
 @app.route("/chain/<int:id>")
@@ -110,6 +114,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if users.login(username, password):
+            flash("Kirjauduit sisään")
             return redirect("/")
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
@@ -117,6 +122,7 @@ def login():
 @app.route("/logout")
 def logout():
     users.logout()
+    flash("Kirjauduit ulos")
     return redirect("/")
 
 @app.route("/register", methods=["GET","POST"])
@@ -138,6 +144,7 @@ def register():
             return render_template("error.html", message="Tuntematon käyttäjärooli")
         
         if users.register(username, password1, role):
+            flash("Rekisteröinti onnistui")
             return redirect("/")
         else:
             return render_template("error.html", message="Rekisteröinti ei onnistunut")
@@ -166,6 +173,7 @@ def edit_subject():
             chain_id = request.form["chain"]
             subject = request.form["subject"]
             chains.edit_subject(chain_id, subject)
+            flash("Ketjun otsikkoa muokattu")
         return redirect("/chain/"+chain_id)
     
 @app.route("/edit_message", methods=["GET", "POST"])
@@ -179,6 +187,7 @@ def edit_message():
             message_id= request.form["message"]
             content = request.form["newmessage"]
             messages.edit_message(message_id, content)
+            flash("Viesti muokattu")
         return redirect("/")
     
 @app.route("/delete_message", methods=["GET", "POST"])
@@ -191,6 +200,7 @@ def delete_message():
         if "message" in request.form:
             message_id = request.form["message"]
             messages.delete_message(message_id, users.user_id())
+            flash("Viesti poistettu")
         return redirect("/")
     
 @app.route("/delete_chain", methods=["GET", "POST"])
@@ -203,6 +213,7 @@ def delete_chain():
         if "chain" in request.form:
             chain_id = request.form["chain"]
             chains.delete_chain(chain_id, users.user_id())
+            flash("Ketju poistettu")
         return redirect("/")
     
 @app.route('/like-message/<int:message_id>', methods=['POST'])
@@ -216,4 +227,5 @@ def like_message(message_id):
             return render_template("error.html", message = "Olet jo arvostellut tämän viestin")
         
         messages.add_like(action, user_id, message_id)
+        flash("Viesti arvioitu")
     return redirect("/")

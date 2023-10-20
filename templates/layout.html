@@ -9,4 +9,14 @@
     <h1>ChitChat</h1>
 </div>
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <p>
+    {% for message in messages %}
+      <p class="flashes">{{ message }}</p>
+    {% endfor %}
+    </p>
+  {% endif %}
+{% endwith %}
+
 {% block content %}{% endblock %}
